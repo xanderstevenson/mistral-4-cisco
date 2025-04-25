@@ -1,0 +1,25 @@
+# Ignore environment variables file
+.env
+.mistral_api_key
+
+# Ignore all files related to devices
+*devices*
+
+# Ignore Python bytecode and temporary files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore virtual environment directory
+venv/
+*.env
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore any directory with 'output' in the name
+*output*/
+
+# Ignore log files
+*.log
