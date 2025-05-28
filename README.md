@@ -20,51 +20,46 @@ A Python environment set up with necessary libraries installed.
 
 **Step 1**: Set Up Mistral AI Agent
 
-1.1 Create Mistral Account
+**1.1** Create Mistral Account
 Go to Mistral AI and sign up for an account.
 
 Set up Multi-Factor Authentication (MFA) and complete the setup.
 
-1.2 Generate an API Key
+**1.2** Generate an API Key
 Navigate to Mistral Console.
 
 Go to API Keys and click Create New Key.
 
 Copy the generated API key. You'll need this to authenticate with Mistral's API.
 
-1.3 Set Up the Environment
+**1.3** Set Up the Environment
 You need a virtual environment to store and manage your Python dependencies. You can create a virtual environment using either venv or poetry.
 
 Using venv
-bash
-Copy
-Edit
+
 mkdir mistral
 cd mistral
 python3 -m venv venv
 source venv/bin/activate
+
 Using poetry
-bash
-Copy
-Edit
+
 mkdir mistral
 cd mistral
 poetry init
 poetry add mistralai
 poetry install
-1.4 Install Mistral Python Client
+
+
+**1.4** Install Mistral Python Client
 Install the Mistral AI Python client to interact with the Mistral API.
 
-bash
-Copy
-Edit
 pip install mistralai
-1.5 Set Up Authentication
+
+**1.5** Set Up Authentication
 Create a file called mistral_auth.py in the root directory of the project. This file will handle authentication with Mistral.
 
-python
-Copy
-Edit
+
 import os
 import mistralai
 
@@ -73,25 +68,22 @@ def get_mistral_client():
     if not api_key:
         raise ValueError("MISTRAL_API_KEY is not set.")
     return mistralai.Mistral(api_key=api_key)
+
+
 Set API Key
 In your terminal, export the Mistral API key:
 
-bash
-Copy
-Edit
+
 export MISTRAL_API_KEY=your_mistral_api_key_here
 Verify the environment variable:
 
-bash
-Copy
-Edit
+
 echo $MISTRAL_API_KEY
-Step 2: Install Required Python Libraries
+
+
+**Step 2**: Install Required Python Libraries
 Use pip to install the necessary dependencies for interacting with the Cisco Nexus switch and processing data.
 
-bash
-Copy
-Edit
 pip install paramiko
 pip install --upgrade mistralai
 pip install langchain openai faiss-cpu beautifulsoup4 langchain-community tiktoken
@@ -100,8 +92,7 @@ Create a YAML file that holds the list of devices you want to interact with.
 
 Example nxos_devices.yaml
 yaml
-Copy
-Edit
+
 devices:
   - name: Nexus9k-101
     ip: 192.168.254.101
@@ -109,7 +100,8 @@ devices:
     password: cisco
 This file will be used by the main script (nxos_mistral.py) to select devices for querying.
 
-Step 4: Main Script (nxos_mistral.py)
+
+**Step 4**: Main Script (nxos_mistral.py)
 Explanation of the Script
 The script nxos_mistral.py connects to Cisco Nexus switches, collects output from various show commands, and then sends the collected data to Mistral for analysis.
 
@@ -124,10 +116,9 @@ Mistral Analysis: Sends the command outputs to Mistral for intelligent analysis.
 
 Results Saving: Saves the results in a directory named after the device, with a timestamped filename.
 
-Code
+
 python
-Copy
-Edit
+
 import os
 import yaml
 import paramiko
@@ -222,30 +213,35 @@ if __name__ == "__main__":
     print(summary)
 
     save_output(selected_device["name"], outputs, summary)
-Step 5: Running the Script
+
+
+**Step 5**: Running the Script
 Ensure that you have the correct API key set up as an environment variable:
 
 bash
-Copy
-Edit
+
 export MISTRAL_API_KEY=your_mistral_api_key_here
 Run the script using Python:
 
 bash
-Copy
-Edit
+
 python nxos_mistral.py
-The script will:
 
-Prompt you to select a device
 
-Collect outputs from show commands
 
-Send the data to Mistral for analysis
+**The script will:**
 
-Save the results in nxos/output with a timestamp
+- Prompt you to select a device
 
-Additional Setup
+-  Collect outputs from show commands
+
+- Send the data to Mistral for analysis
+
+- Save the results in nxos/output with a timestamp
+
+
+**Additional Setup**
+
 Automation: You can automate this script to run at regular intervals using cron or other task schedulers.
 
 Slack/Email Notifications: Modify the script to send output summaries to Slack or via email if needed.
