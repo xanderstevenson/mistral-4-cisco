@@ -15,7 +15,7 @@ A Python environment set up with necessary libraries installed.
 
 ## Set Up
 
-Step 1: Set Up Mistral AI Agent
+**Step 1**: Set Up Mistral AI Agent
 1.1 Create Mistral Account
 Go to Mistral AI and sign up for an account.
 
