@@ -3,6 +3,7 @@
 ## Objective
 This guide will walk you through setting up the Mistral AI Agent to interact with Cisco Nexus 9000 series switches. We'll use the Mistral API for intelligent analysis of device outputs like show vrf, show vlan, and show logging.
 
+- - -
 
 ## Prerequisites
 Before starting, ensure you have the following:
@@ -13,9 +14,12 @@ A Mistral AI account and API key to interact with the Mistral model.
 
 A Python environment set up with necessary libraries installed.
 
+- - - 
+
 ## Set Up
 
 **Step 1**: Set Up Mistral AI Agent
+
 1.1 Create Mistral Account
 Go to Mistral AI and sign up for an account.
 
