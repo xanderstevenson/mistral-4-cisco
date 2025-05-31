@@ -23,3 +23,6 @@ Thumbs.db
 
 # Ignore log files
 *.log
+
+# make sure nxos dir displays
+!nxos/
