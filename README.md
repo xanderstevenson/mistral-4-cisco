@@ -4,6 +4,8 @@
 
 This project automates the collection and analysis of data from Cisco network devices using SSH and the Mistral AI API. The goal is to provide network engineers with intelligent summaries and insights into device configurations, operational status, and potential issues. The script connects to devices, collects output from various `show` commands, and then sends the collected data to Mistral AI for analysis. The results are then displayed in the terminal and saved in organized, timestamped YAML files. This version supports multiple device types (e.g., nxos, iosxe) and groups analysis by device type.
 
+<img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/Mistral-Output.png" width="400">
+
 ## **Use Case**
 
 *   *Proactive Network Monitoring*: Regularly collect and analyze device data to identify potential problems before they impact the network.
