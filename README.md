@@ -100,7 +100,7 @@ devices:
     password: Admin_1234!
 ```
 
-The devices should be accurately labelled by device_type so they script can loop though those device families, aggregate the family info, and send it to Mistral for analysis on individual devices, as well as on the family of devices.
+The devices should be accurately labelled by device_type so they script can loop though those device families, aggregate the family info, and send it to Mistral for analysis on individual devices, as well as on the family of devices. *For the the NX-OS device used for demonstration, I am connecting Open NX-OS Programmability AlwaysOn sandbox from Cisco DevNet: https://devnetsandbox.cisco.com/DevNet/catalog/Open-NX-OS-Programmability_open-nx-os*
 
 ## **Run It**
 
