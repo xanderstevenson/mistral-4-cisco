@@ -64,7 +64,7 @@ pip install -r requirements.txt
 
 **Step 4: Create a `.env` File**
 
-Create a `.env` file in the root directory of your project to store your Mistral AI API key in a persistent manner:
+A. Create a `.env` file in the root directory of your project to store your Mistral AI API key in a persistent manner:
 
 ```bash
 touch .env
@@ -72,12 +72,14 @@ touch .env
 
 ....placing the key inside like so:
 
+```bash
 MISTRAL_API_KEY=your_mistral_api_key_here
+````
 
-This method may require some additional steps in IDEs like VS Code, such as adding an entry in .vscode/settings.json as well as the settings.json in the VS Code Settings.
+* This method may require some additional steps in IDEs like VS Code, such as adding an entry in .vscode/settings.json as well as the settings.json in the VS Code Settings.
 
 
-To save the API key non-persistently, you can:
+B. To save the API key non-persistently, you can:
 
 ```bash
 MISTRAL_API_KEY=your_mistral_api_key_here
