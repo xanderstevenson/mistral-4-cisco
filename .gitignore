@@ -3,7 +3,7 @@
 .mistral_api_key
 
 # Ignore all files related to devices
-*devices*.*
+# *devices*.*
 
 # Ignore Python bytecode and temporary files
 __pycache__/
