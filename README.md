@@ -60,7 +60,7 @@ Install the necessary Python libraries using `pip`:
 pip install -r requirements.txt
 ```
 
-## **Environment Variable Setup**
+
 
 **Step 4: Create a `.env` File**
 
@@ -84,6 +84,19 @@ B. To save the API key non-persistently, you can:
 ```bash
 MISTRAL_API_KEY=your_mistral_api_key_here
 ```
+
+**Step 4: Edit the `source_of_truth/devices.yaml` File**
+
+```bash
+devices:
+  - name: Open NX-OS Programmability AlwaysOn
+    device_type: nxos
+    ip: sbx-nxos-mgmt.cisco.com
+    username: admin
+    password: Admin_1234!
+```
+
+The devices should be accurately labelled by device_type so they scriot can loop though those families, aggregate the family info, and send to Mistral for analysis on individual devices, as well as on the family of devices.
 
 
 
