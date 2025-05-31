@@ -94,7 +94,11 @@ MISTRAL_API_KEY=your_mistral_api_key_here
 ```
 
 
-### **Step 5: Edit the `source_of_truth/devices.yaml` File**
+### **Step 5: Create the `source_of_truth/devices.yaml` File**
+
+``bash
+mkdir source_of_truth
+touch source_of_truth/devices.yaml
 
 ```bash
 devices:
