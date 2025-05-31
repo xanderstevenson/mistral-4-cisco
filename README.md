@@ -50,8 +50,7 @@ It is highly recommended to use a virtual environment to manage project dependen
 3.  Clone this Repo:
 
     ```bash
-    mkdir mistral-cisco-analyzer
-    cd mistral-cisco-analyzer
+    git clone https://github.com/xanderstevenson/mistral-4-cisco.git
     ```
 
 
@@ -109,6 +108,24 @@ From the `mistral_4_cisco` directory, run:
 ```bash
 python mistral.py
 ```
+
+**The script will:**
+
+
+Load the device information from source_of_truth/devices.yaml.
+Group the devices by their device_type.
+Connect to each device via SSH and execute a series of show commands.
+Send the combined output from each device type to Mistral AI for analysis.
+Display the analysis 
+Save the raw output and the AI-generated summary to a timestamped YAML file in the output/<device_type> directory.
+
+**Review the Output**
+
+
+The script will create a directory named output (if it doesn't already exist) and subdirectories for each device type (e.g., output/nxos, output/iosxe).
+Each subdirectory will contain timestamped YAML files with the raw device outputs and the AI-generated summaries.
+
+
 
 
 
