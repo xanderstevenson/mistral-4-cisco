@@ -1,0 +1,10 @@
+{
+    "name": "Python: Current File",
+    "type": "python",
+    "request": "launch",
+    "program": "${file}",
+    "console": "integratedTerminal",
+    "env": {
+        "MISTRAL_API_KEY": "${env:MISTRAL_KEY}"
+    }
+}
