@@ -6,7 +6,7 @@ This project automates the collection and analysis of data from Cisco network de
 
 ## **Use Case**
 
-*   Proactive Network Monitoring: Regularly collect and analyze device data to identify potential problems before they impact the network.
+*   *Proactive Network Monitoring*: Regularly collect and analyze device data to identify potential problems before they impact the network.
 *   Configuration Auditing: Ensure that devices are configured according to organizational standards and security best practices.
 *   Troubleshooting: Quickly gather and analyze relevant data from multiple devices to diagnose network issues.
 *   Security Analysis: Identify potential security vulnerabilities or misconfigurations.
