@@ -1,6 +1,6 @@
 # **Mistral AI-Powered Network Analysis for Cisco Devices**
 
-<img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/mistral-ai.jpg" width="400" style="display: block; margin-left: auto; margin-right: auto;">
+<img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/mistral-ai.jpg" width="400" style="display: block; margin: 0px auto; align-content: center">
 
 ## **Objective**
 
