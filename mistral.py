@@ -48,6 +48,17 @@ def collect_device_info(device):
 def aggregate_device_info(output_dict, device_type): # Added device_type
     prompt = f"""You are an expert network, automation, platform engineering, and security engineer. Analyze the following outputs from devices of type '{device_type}'.
 
+    If there is only one device, provide a detailed analysis of that device, including its:
+
+    *   Operational state
+    *   Key configurations
+    *   Relevant logs
+    *   Any potential issues or anomalies.
+
+    Skip the combined analysis section.
+
+    If there are multiple devices, then:
+
     For each individual device, provide a concise summary of its:
 
     *   Operational state
