@@ -19,7 +19,7 @@ venv/
 Thumbs.db
 
 # Ignore any directory with 'output' in the name
-*output*/
+# *output*/
 
 # Ignore log files
 *.log
