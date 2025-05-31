@@ -109,21 +109,33 @@ From the `mistral_4_cisco` directory, run:
 python mistral.py
 ```
 
-**The script will:**
+***The script will:***
 
+1.  Load the device information from `source_of_truth/devices.yaml`.
+2.  Group the devices by their `device_type`.
+3.  Connect to each device via SSH and execute a series of `show` commands.
+4.  **Analyze the Device Outputs:**
+    *   **If there is only one device of a particular `device_type`:** Send the output from that device to Mistral AI for a detailed individual analysis.
+    *   **If there are multiple devices of a particular `device_type`:**
+        *   Send the output from each device to Mistral AI for individual analysis.
+        *   Send the combined output from all devices of that type to Mistral AI for a combined analysis, including identification of common configurations, deviations, and potential vulnerabilities.
+5.  Save the raw outputs and the AI-generated summaries to a timestamped YAML file in the `output/<device_type>` directory.
 
-Load the device information from source_of_truth/devices.yaml.
-Group the devices by their device_type.
-Connect to each device via SSH and execute a series of show commands.
-Send the combined output from each device type to Mistral AI for analysis.
-Display the analysis 
-Save the raw output and the AI-generated summary to a timestamped YAML file in the output/<device_type> directory.
 
 **Review the Output**
 
 
-The script will create a directory named output (if it doesn't already exist) and subdirectories for each device type (e.g., output/nxos, output/iosxe).
-Each subdirectory will contain timestamped YAML files with the raw device outputs and the AI-generated summaries.
+The script will create a directory named `output` (if it doesn't already exist) and subdirectories for each device type (e.g., `output/nxos`, `output/iosxe`). Each subdirectory will contain timestamped YAML files with the raw device outputs and the AI-generated summaries.
+
+The YAML files will contain:
+
+*   The `device_type`.
+*   A timestamp.
+*   **If there is only one device of that type:** The raw outputs from that device and a detailed AI-generated summary of that device.
+*   **If there are multiple devices of that type:**
+    *   The raw outputs from each device.
+    *   AI-generated summaries for each individual device.
+    *   A combined AI-generated summary that identifies common configurations, deviations, and potential vulnerabilities across all devices of that type.
 
 
 
