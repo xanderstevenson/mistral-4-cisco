@@ -64,7 +64,7 @@ pip install -r requirements.txt
 
 
 
-**Step 4: Create a `.env` File**
+### **Step 4: Create a `.env` File**
 
 A. Create a `.env` file in the root directory of your project to store your Mistral AI API key in a persistent manner:
 
@@ -88,7 +88,7 @@ MISTRAL_API_KEY=your_mistral_api_key_here
 ```
 
 
-**Step 5: Edit the `source_of_truth/devices.yaml` File**
+### **Step 5: Edit the `source_of_truth/devices.yaml` File**
 
 ```bash
 devices:
@@ -109,7 +109,7 @@ From the `mistral_4_cisco` directory, run:
 python mistral.py
 ```
 
-***The script will:***
+### ***The script will:***
 
 1.  Load the device information from `source_of_truth/devices.yaml`.
 2.  Group the devices by their `device_type`.
@@ -123,7 +123,7 @@ python mistral.py
 6.  Display analysis for each device and for the device group in the terminal.
 
 
-**Review the Output**
+### **Review the Output**
 
 
 The script will create a directory named `output` (if it doesn't already exist) and subdirectories for each device type (e.g., `output/nxos`, `output/iosxe`). Each subdirectory will contain timestamped YAML files with the raw device outputs and the AI-generated summaries.
