@@ -7,32 +7,32 @@ This project automates the collection and analysis of data from Cisco network de
 ## **Use Case**
 
 *   *Proactive Network Monitoring*: Regularly collect and analyze device data to identify potential problems before they impact the network.
-*   Configuration Auditing: Ensure that devices are configured according to organizational standards and security best practices.
-*   Troubleshooting: Quickly gather and analyze relevant data from multiple devices to diagnose network issues.
-*   Security Analysis: Identify potential security vulnerabilities or misconfigurations.
-*   Inventory and Documentation: Automatically generate summaries of device configurations for documentation purposes.
+*   *Configuration Auditing*: Ensure that devices are configured according to organizational standards and security best practices.
+*   *Troubleshooting*: Quickly gather and analyze relevant data from multiple devices to diagnose network issues.
+*   *Security Analysis*: Identify potential security vulnerabilities or misconfigurations.
+*   *Inventory and Documentation*: Automatically generate summaries of device configurations for documentation purposes.
 
 ## **Prerequisites**
 
 Before you begin, ensure you have the following:
 
-*   Cisco Network Devices: Access to Cisco network devices (e.g., Nexus switches, IOS-XE routers) with SSH enabled.
-*   Mistral AI Account and API Key: A Mistral AI account and a valid API key. You can sign up at [Mistral AI](https://mistral.ai/).
-*   Python Environment: A Python 3.9+ environment with the necessary libraries installed.
-*   SSH Credentials: Valid SSH credentials (username and password) for accessing the Cisco devices.
-*   Source of Truth YAML File: A YAML file (e.g., `source_of_truth/devices.yaml`) containing a list of devices with their connection details and device types.
+*   *Cisco Network Devices*: Access to Cisco network devices (e.g., Nexus switches, IOS-XE routers) with SSH enabled.
+*   *Mistral AI Account and API Key*: A Mistral AI account and a valid API key. You can sign up at [Mistral AI](https://mistral.ai/).
+*   *Python Environment*: A Python 3.9+ environment with the necessary libraries installed.
+*   *SSH Credentials*: Valid SSH credentials (username and password) for accessing the Cisco devices.
+*   *Source of Truth YAML File*: A YAML file (e.g., `source_of_truth/devices.yaml`) containing a list of devices with their connection details and device types.
 
 ## **Set Up**
 
 **Step 1: Obtain a Mistral AI API Key**
 
-1.  Create a Mistral AI Account: Go to [Mistral AI](https://mistral.ai/) and sign up for an account. Set up Multi-Factor Authentication (MFA) for enhanced security.
-2.  Generate an API Key: Navigate to the Mistral Console. Go to API Keys and click "Create New Key". Copy the generated API key.
+1.  *Create a Mistral AI Account*: Go to [Mistral AI](https://mistral.ai/) and sign up for an account. Set up Multi-Factor Authentication (MFA) for enhanced security.
+2.  *Generate an API Key*: Navigate to the Mistral Console. Go to API Keys and click "Create New Key". Copy the generated API key.
 
 
 **Step 2: Create a Python Virtual Environment**
 
-It is highly recommended to use a virtual environment to manage project dependencies.
+It is **highly recommended** to use a virtual environment to manage project dependencies.
 
 
 1.  Create a Virtual Environment:
@@ -99,7 +99,7 @@ devices:
     password: Admin_1234!
 ```
 
-The devices should be accurately labelled by device_type so they scriot can loop though those families, aggregate the family info, and send to Mistral for analysis on individual devices, as well as on the family of devices.
+The devices should be accurately labelled by device_type so they script can loop though those device families, aggregate the family info, and send it to Mistral for analysis on individual devices, as well as on the family of devices.
 
 ## **Run It**
 
@@ -137,9 +137,3 @@ The YAML files will contain:
     *   The raw outputs from each device.
     *   AI-generated summaries for each individual device.
     *   A combined AI-generated summary that identifies common configurations, deviations, and potential vulnerabilities across all devices of that type.
-
-
-
-
-
-
