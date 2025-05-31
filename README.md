@@ -98,5 +98,14 @@ devices:
 
 The devices should be accurately labelled by device_type so they scriot can loop though those families, aggregate the family info, and send to Mistral for analysis on individual devices, as well as on the family of devices.
 
+## **Run It**
+
+From the `mistral_4_cisco` directory, run:
+
+```bash
+python mistral.py
+```
+
+
 
 
