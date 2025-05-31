@@ -70,7 +70,7 @@ pip install -r requirements.txt
 
 
 
-### **Step 4: Create a `.env` File**
+### **Step 4: Place the Mistral API key in the environment**
 
 A. Create a `.env` file in the root directory of your project to store your Mistral AI API key in a persistent manner:
 
