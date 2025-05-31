@@ -50,7 +50,7 @@ def collect_device_info(device):
 
 # --- Aggregate Output ---
 def aggregate_device_info(output_dict):
-    combined_input = "You are a network engineer. Analyze the following outputs from a Cisco Nexus switch and provide a summary of the device state, configurations, logs, and any potential issues.\n\n"
+    combined_input = "You are an expert network, automation, platform engineering, and security engineer. Analyze the following outputs from a Cisco Nexus switch and provide a summary of the device state, configurations, logs, and any potential issues.\n\n"
     for command, output in output_dict.items():
         combined_input += f"\n\n### {command} ###\n{output}"
     return combined_input
