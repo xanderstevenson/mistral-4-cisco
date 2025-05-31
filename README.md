@@ -120,6 +120,7 @@ python mistral.py
         *   Send the output from each device to Mistral AI for individual analysis.
         *   Send the combined output from all devices of that type to Mistral AI for a combined analysis, including identification of common configurations, deviations, and potential vulnerabilities.
 5.  Save the raw outputs and the AI-generated summaries to a timestamped YAML file in the `output/<device_type>` directory.
+6.  Display analysis for each device and for the device group in the terminal.
 
 
 **Review the Output**
