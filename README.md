@@ -29,7 +29,8 @@ Before you begin, ensure you have the following:
 1.  Create a Mistral AI Account: Go to [Mistral AI](https://mistral.ai/) and sign up for an account. Set up Multi-Factor Authentication (MFA) for enhanced security.
 2.  Generate an API Key: Navigate to the Mistral Console. Go to API Keys and click "Create New Key". Copy the generated API key.
 
-- - -
+<br>
+<br>
 
 **Step 2: Create a Python Virtual Environment**
 
