@@ -29,31 +29,31 @@ Before you begin, ensure you have the following:
 1.  Create a Mistral AI Account: Go to [Mistral AI](https://mistral.ai/) and sign up for an account. Set up Multi-Factor Authentication (MFA) for enhanced security.
 2.  Generate an API Key: Navigate to the Mistral Console. Go to API Keys and click "Create New Key". Copy the generated API key.
 
-<br>
-<br>
 
 **Step 2: Create a Python Virtual Environment**
 
 It is highly recommended to use a virtual environment to manage project dependencies.
 
-1.  Create a Project Directory:
+
+1.  Create a Virtual Environment:
+
+    ```bash
+    python3 -m venv venv
+    ```
+
+2.  Activate the Virtual Environment:
+
+    ```bash
+    source venv/bin/activate
+    ```
+
+3.  Clone this Repo:
 
     ```bash
     mkdir mistral-cisco-analyzer
     cd mistral-cisco-analyzer
     ```
 
-2.  Create a Virtual Environment:
-
-    ```bash
-    python3 -m venv venv
-    ```
-
-3.  Activate the Virtual Environment:
-
-    ```bash
-    source venv/bin/activate
-    ```
 
 **Step 3: Install Required Python Libraries**
 
@@ -88,7 +88,8 @@ B. To save the API key non-persistently, you can:
 MISTRAL_API_KEY=your_mistral_api_key_here
 ```
 
-**Step 4: Edit the `source_of_truth/devices.yaml` File**
+
+**Step 5: Edit the `source_of_truth/devices.yaml` File**
 
 ```bash
 devices:
