@@ -94,7 +94,7 @@ The engineer has the following question:
 Provide specific, actionable troubleshooting steps to address the engineer's question, referencing the raw device outputs as needed."""
 
         response = mistral_client.chat.complete(
-            model="mistral-small",
+            model="pixtral-12b-2409",
             messages=[{"role": "user", "content": prompt}],
             max_tokens=2000
         )
