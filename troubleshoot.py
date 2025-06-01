@@ -6,6 +6,7 @@ from datetime import datetime
 from mistral_auth import get_mistral_client
 import time  # For handling streaming
 
+
 def create_troubleshooting_agent(client):
     try:
         agent = client.beta.agents.create(
@@ -20,13 +21,14 @@ def create_troubleshooting_agent(client):
             completion_args={
                 "temperature": 0.3,
                 "top_p": 0.95,
-            }
+            },
         )
         print(f"✅ Created agent with ID: {agent.id}")
         return agent.id
     except Exception as e:
         print(f"Error creating agent: {e}")
         return None
+
 
 def get_most_recent_yaml_files(device_type, n=3):
     output_dir = os.path.join("output", device_type)
@@ -37,6 +39,7 @@ def get_most_recent_yaml_files(device_type, n=3):
     files = glob.glob(os.path.join(output_dir, "*.yaml"))
     files.sort(key=os.path.getmtime, reverse=True)
     return files[:n]
+
 
 def choose_yaml_file(device_type):
     files = get_most_recent_yaml_files(device_type)
@@ -60,6 +63,7 @@ def choose_yaml_file(device_type):
         except ValueError:
             print("Invalid input. Please enter a number.")
 
+
 def troubleshoot_with_mistral(mistral_client, agent_id, yaml_path, user_question):
     try:
         with open(yaml_path, "r") as f:
@@ -77,7 +81,9 @@ def troubleshoot_with_mistral(mistral_client, agent_id, yaml_path, user_question
         outputs_str = yaml.dump(outputs, default_flow_style=False)
         max_output_chars = 3000
         if len(outputs_str) > max_output_chars:
-            outputs_str = outputs_str[:max_output_chars] + "\n... [truncated due to token limit]"
+            outputs_str = (
+                outputs_str[:max_output_chars] + "\n... [truncated due to token limit]"
+            )
 
         prompt = f"""You are an expert network troubleshooting assistant. A network engineer has provided you with the following data from devices of type '{device_type}', along with an initial AI-generated summary.
 
@@ -96,7 +102,7 @@ Provide specific, actionable troubleshooting steps to address the engineer's que
         response = mistral_client.chat.complete(
             model="pixtral-12b-2409",
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=2000
+            max_tokens=2000,
         )
 
         troubleshooting_guidance = response.choices[0].message.content.strip()
@@ -111,6 +117,7 @@ Provide specific, actionable troubleshooting steps to address the engineer's que
     except Exception as e:
         print(f"❌ Error during Mistral analysis: {e}")
 
+
 if __name__ == "__main__":
     mistral_client = get_mistral_client()
 
@@ -121,7 +128,9 @@ if __name__ == "__main__":
 
         if yaml_path:
             user_question = input("What would you like help troubleshooting? ")
-            troubleshoot_with_mistral(mistral_client, agent_id, yaml_path, user_question)
+            troubleshoot_with_mistral(
+                mistral_client, agent_id, yaml_path, user_question
+            )
         else:
             print("❌ No YAML file selected. Exiting.")
     else:
