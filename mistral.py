@@ -35,7 +35,7 @@ def collect_device_info(device):
     ]
 
     outputs = {}
-    print(f"🔌 Collecting device information for {device['name']} ({device['ip']})...") # Added device info
+    print(f"\n🔌 Collecting device information for {device['name']} ({device['ip']})...") # Added device info
     for command in commands:
         print(f"🔌 Running command: {command}")
         try:
@@ -45,40 +45,43 @@ def collect_device_info(device):
     return outputs
 
 # --- Aggregate Output ---
-def aggregate_device_info(output_dict, device_type): # Added device_type
-    prompt = f"""You are an expert network, automation, platform engineering, and security engineer. Analyze the following outputs from devices of type '{device_type}'.
+def aggregate_device_info(output_dict, device_type):
+    num_devices = len(output_dict)
 
-    If there is only one device, provide a detailed analysis of that device, including its:
+    if num_devices == 1:
+        prompt = f"""You are an expert network, automation, platform engineering, and security engineer. Analyze the following outputs from a single device of type '{device_type}'.
 
-    *   Operational state
-    *   Key configurations
-    *   Relevant logs
-    *   Any potential issues or anomalies.
+        Provide a detailed analysis of this device, including its:
 
-    Skip the combined analysis section.
+        *   Operational state
+        *   Key configurations
+        *   Relevant logs
+        *   Any potential issues or anomalies.
 
-    If there are multiple devices, then:
+        Focus on providing actionable recommendations based on your analysis."""
+    else:
+        prompt = f"""You are an expert network, automation, platform engineering, and security engineer. Analyze the following outputs from multiple devices of type '{device_type}'.
 
-    For each individual device, provide a concise summary of its:
+        For each individual device, provide a concise summary of its:
 
-    *   Operational state
-    *   Key configurations
-    *   Relevant logs
-    *   Any potential issues or anomalies specific to that device
+        *   Operational state
+        *   Key configurations
+        *   Relevant logs
+        *   Any potential issues or anomalies specific to that device
 
-    After summarizing each device individually, provide a combined analysis that identifies:
+        After summarizing each device individually, provide a combined analysis that identifies:
 
-    *   Common configurations and settings across all devices of type '{device_type}'.
-    *   Any significant deviations from the norm or inconsistencies between devices.
-    *   Potential security vulnerabilities or misconfigurations that are present in some devices but not others.
-    *   Suggestions for improving consistency, security, and overall operational efficiency across the '{device_type}' device family.
+        *   Common configurations and settings across all devices of type '{device_type}'.
+        *   Any significant deviations from the norm or inconsistencies between devices.
+        *   Potential security vulnerabilities or misconfigurations that are present in some devices but not others.
+        *   Suggestions for improving consistency, security, and overall operational efficiency across the '{device_type}' device family.
 
-    Focus on providing actionable recommendations based on your analysis."""
+        Focus on providing actionable recommendations based on your analysis."""
 
-    combined_input = prompt # Assign the prompt to combined_input
+    combined_input = prompt.format(device_type=device_type)
 
-    for device_name, device_outputs in output_dict.items(): # Iterate through device names and their outputs
-        combined_input += f"\n\n### {device_name} ###\n" # Add device name to the aggregated input
+    for device_name, device_outputs in output_dict.items():
+        combined_input += f"\n\n### {device_name} ###\n"
         for command, output in device_outputs.items():
             combined_input += f"\n\n#### {command} ####\n{output}"
     return combined_input
@@ -122,7 +125,7 @@ if __name__ == "__main__":
 
     # Process each device type
     for device_type, device_list in devices_by_type.items():
-        print(f"\n--- Processing devices of type: {device_type} ---\n\n")
+        print(f"\n--- Processing devices of type: {device_type} ---\n")
 
         # Collect device information for all devices of this type
         all_outputs = {}
