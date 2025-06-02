@@ -6,24 +6,54 @@ from mistral_auth import get_mistral_client
 
 
 # --- SSH Command Execution ---
-def ssh_connect_and_run_command(device_ip, username, password, command):
+def ssh_connect_and_run_command(device_ip, username, password, command, timeout=3):
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(device_ip, username=username, password=password)
-    stdin, stdout, stderr = client.exec_command(command)
-    output = stdout.read().decode()
-    client.close()
-    return output
+    try:
+        client.connect(
+            device_ip,
+            username=username,
+            password=password,
+            timeout=timeout,
+            banner_timeout=timeout,
+            auth_timeout=timeout
+        )
+        stdin, stdout, stderr = client.exec_command(command, timeout=timeout)
+        output = stdout.read().decode()
+        return output
+    except Exception as e:
+        return f"Error: {str(e)}"
+    finally:
+        client.close()
 
 
 # --- Load Devices ---
-def load_devices(filename="source_of_truth/devices.yaml"):  # Changed default filename
+def load_devices(filename="source_of_truth/devices.yaml"):
     try:
         with open(filename, "r") as f:
             return yaml.safe_load(f)["devices"]
     except FileNotFoundError:
         print(f"Error: File '{filename}' not found")
         return []
+
+
+def test_ssh_connection(device_ip, username, password, timeout=3):
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    try:
+        client.connect(
+            device_ip,
+            username=username,
+            password=password,
+            timeout=timeout,
+            banner_timeout=timeout,
+            auth_timeout=timeout
+        )
+        return True
+    except Exception:
+        return False
+    finally:
+        client.close()
 
 
 # --- Collect Device Info ---
@@ -38,17 +68,19 @@ def collect_device_info(device):
     ]
 
     outputs = {}
-    print(
-        f"\n🔌 Collecting device information for {device['name']} ({device['ip']})..."
-    )  # Added device info
+    print(f"\n🔌 Collecting device information for {device['name']} ({device['ip']})...")
+    
+    
+    # 🔍 Test connection first
+    if not test_ssh_connection(device["ip"], device["username"], device["password"]):
+        print(f"❌ Unable to connect to {device['name']} ({device['ip']})")
+        return {cmd: "Unable to connect" for cmd in commands}
+    
     for command in commands:
         print(f"🔌 Running command: {command}")
-        try:
-            outputs[command] = ssh_connect_and_run_command(
-                device["ip"], device["username"], device["password"], command
-            )
-        except Exception as e:
-            outputs[command] = f"Error: {str(e)}"
+        outputs[command] = ssh_connect_and_run_command(
+            device["ip"], device["username"], device["password"], command
+        )
     return outputs
 
 
@@ -95,13 +127,19 @@ def aggregate_device_info(output_dict, device_type):
     return combined_input
 
 
-# --- Analyze with Mistral (Codestral-Mamba) ---
+# --- Analyze with Mistral (Updated for SDK v1.x) ---
 def analyze_with_mistral(mistral_client, output):
     try:
+        messages = [
+            {
+                "role": "user",
+                "content": output
+            }
+        ]
         response = mistral_client.chat.complete(
-            model="pixtral-12b-2409",
-            messages=[{"role": "user", "content": output}],
-            max_tokens=2000,
+            model="pixtral-12b-2409",  # or another available model
+            messages=messages,
+            max_tokens=2000
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
@@ -110,9 +148,9 @@ def analyze_with_mistral(mistral_client, output):
 
 
 # --- Save Results to Timestamped YAML ---
-def save_output(device_type, outputs, summary):  # Changed to device_type
+def save_output(device_type, outputs, summary):
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    output_dir = os.path.join("output", device_type)  # Changed to device_type
+    output_dir = os.path.join("output", device_type)
     os.makedirs(output_dir, exist_ok=True)
 
     output_path = os.path.join(output_dir, f"{timestamp}.yaml")
@@ -126,55 +164,41 @@ def save_output(device_type, outputs, summary):  # Changed to device_type
             },
             f,
             default_flow_style=False,
-        )  # Changed to device_type
-
+        )
     print(f"💾 Output saved to {output_path}")
 
 
-# --- Main Pipeline ---
+# --- Main Execution ---
 if __name__ == "__main__":
     devices = load_devices()
 
-    # Group devices by device_type
     devices_by_type = {}
     for device in devices:
-        device_type = device.get(
-            "device_type", "unknown"
-        )  # Get device_type, default to "unknown"
+        device_type = device.get("device_type", "unknown")
         if device_type not in devices_by_type:
             devices_by_type[device_type] = []
         devices_by_type[device_type].append(device)
 
-    # Process each device type
     for device_type, device_list in devices_by_type.items():
         print(f"\n--- Processing devices of type: {device_type} ---\n")
 
-        # Collect device information for all devices of this type
         all_outputs = {}
         for device in device_list:
-            all_outputs[device["name"]] = collect_device_info(
-                device
-            )  # Use device name as key
+            all_outputs[device["name"]] = collect_device_info(device)
 
-        # Aggregate the device information
         print("📚 Aggregating device information...")
-        aggregated_input = aggregate_device_info(
-            all_outputs, device_type
-        )  # Pass device_type
+        aggregated_input = aggregate_device_info(all_outputs, device_type)
 
-        # Analyze with Mistral
         print("🧠 Talking to Mistral...")
         mistral_client = get_mistral_client()
         summary = analyze_with_mistral(mistral_client, aggregated_input)
 
-        # Print the summary
         print("\n\n✅ Detailed Summary:\n\n")
         print(summary)
 
-        # Save the output
-        save_output(device_type, all_outputs, summary)  # Pass device_type
+        save_output(device_type, all_outputs, summary)
+
+                # --- Call Collaboration Script ---
+        os.system(f"python analyze_and_collab.py {device_type}")
 
     print("\n\n✅ Done processing all devices.")
-
-# --- Call Collaboration Script ---
-os.system(f"python analyze_and_collab.py {device_type}")

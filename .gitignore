@@ -26,3 +26,9 @@ Thumbs.db
 
 # make sure nxos dir displays
 !nxos/
+
+
+# ignore agent id file and coonversation id file
+
+agent_id.txt
+conversation_id.txt
