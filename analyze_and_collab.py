@@ -101,8 +101,12 @@ def send_agent_update(client, agent_id, summary, device_type, timestamp):
     try:
         input_text = (
             f"A network scan of Cisco `{device_type}` devices was completed at `{timestamp}`. "
-            f"Here's the AI-generated summary:\n\n{summary}"
+            f"Here is the raw issue summary:\n\n{summary}\n\n"
+            "Please identify the most critical issues first, especially unreachable devices, outages, or total failures. "
+            "Summarize key points in priority order. Avoid repeating similar issues unless they impact different systems. "
+            "Keep the summary focused and high signal."
         )
+
 
         conversation_id = load_conversation_id()
 
