@@ -3,8 +3,15 @@ import yaml
 import glob
 import requests
 from dotenv import load_dotenv
+from mistralai.client import MistralClient
 
 load_dotenv()
+
+MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
+AGENT_ID = os.getenv("AGENT_ID")
+
+def get_mistral_client():
+    return MistralClient(api_key=MISTRAL_API_KEY)
 
 # Load from .env
 WEBEX_TOKEN = os.getenv("WEBEX_BOT_TOKEN")
@@ -52,6 +59,22 @@ def is_critical(summary):
     summary_tail = summary[-2000:].upper()  # Look at only the last part (trimmed to avoid noise)
     return any(keyword in summary_tail for keyword in SEVERITY_KEYWORDS)
 
+def send_agent_update(client, agent_id, summary, device_type, timestamp):
+    try:
+        input_text = f"""A network scan of Cisco `{device_type}` devices was completed at `{timestamp}`. Here's the AI-generated summary:\n\n{summary}"""
+        thread = client.beta.threads.create()
+        client.beta.threads.messages.create(
+            thread_id=thread.id,
+            role="user",
+            content=input_text,
+        )
+        response = client.beta.threads.retrieve_message(
+            thread_id=thread.id,
+            message_id=thread.id  # note: in real cases, you might fetch latest message or complete
+        )
+        print(f"🧠 Agent received update for {device_type}.")
+    except Exception as e:
+        print(f"⚠️ Failed to update agent: {e}")
 
 
 # --- Send Webex Message ---
@@ -76,7 +99,6 @@ def send_webex_message(recipient, message, is_room=False):
         print(f"❌ Failed to send Webex message: {response.status_code} {response.text}")
 
 
-
 # --- Main Logic ---
 def main(device_type):
     latest_yaml = get_latest_yaml(device_type)
@@ -89,6 +111,10 @@ def main(device_type):
 
     # Check critical first
     critical_issue_found = is_critical(summary)
+
+    mistral_client = get_mistral_client()
+    if AGENT_ID:
+        send_agent_update(mistral_client, AGENT_ID, summary, device_type_loaded, timestamp)
 
     # Prepare short issue summary for team message
     short_issue = (
