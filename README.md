@@ -146,9 +146,9 @@ The devices should be accurately labelled by device_type so they script can loop
 
 **Note** *For the the NX-OS device used in this demonstration, I am connecting to the Open NX-OS Programmability AlwaysOn sandbox from Cisco DevNet: https://devnetsandbox.cisco.com/DevNet/catalog/Open-NX-OS-Programmability_open-nx-os*
 
+---
 
-
-## **Run It**
+## **🚀Run It**
 
 From the `mistral_4_cisco` directory, run:
 
@@ -169,8 +169,19 @@ python mistral.py
 5.  Save the raw outputs and the AI-generated summaries to a timestamped YAML file in the `output/<device_type>` directory.
 6.  Display analysis for each device and for the device group in the terminal.
 
-
 <img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/Mistral-Output.png" width="800" style="display: block; margin-left: auto; margin-right: auto;">
+
+7. Invoke analyze_and_collab.py to create or continue a persistent AI Agent conversation:
+
+- This script manages a long-lived conversation by storing agent_id and conversation_id in agent_id.txt and conversation_id.txt.
+
+- The Agent keeps context between runs, enabling ongoing collaborative troubleshooting and analysis.
+
+- The conversation remains open, ready for additional inputs in future runs.
+
+- At least one Webex message with summary information is sent to configured spaces.
+
+- If the network state is deemed critical, a second urgent Webex message is sent to alert the team promptly.
 
 
 ### **Review the Output**
@@ -187,3 +198,23 @@ The YAML files will contain:
     *   The raw outputs from each device.
     *   AI-generated summaries for each individual device.
     *   A combined AI-generated summary that identifies common configurations, deviations, and potential vulnerabilities across all devices of that type.
+
+---
+
+## **👩🏽‍💻Notes on the Workflow**
+
+- The primary use case is `running mistral.py`, which automates the entire workflow and invokes `analyze_and_collab.py` internally.
+
+- `analyze_and_collab.py` manages a persistent AI Agent conversation by saving conversation IDs locally (`agent_id.txt` and `conversation_id.txt`), allowing the Agent to maintain context across multiple script executions.
+
+- This dual-layer approach uses the Mistral AI API for immediate analysis and the Agent for persistent, conversational context—providing redundancy and richer collaboration in case one service is down.
+
+- The Agent conversation stays open after each run, enabling continued interaction and incremental updates.
+
+- Webex notifications are automatically sent by `analyze_and_collab.py`:
+
+A summary message is always sent.
+
+An additional urgent alert message is sent if the network state is critical, ensuring timely awareness and response.
+
+- For ad hoc, non-persistent troubleshooting, users can run `troubleshoot.py` directly to engage with the AI Agent without persisting context.
