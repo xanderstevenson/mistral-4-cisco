@@ -176,12 +176,16 @@ python mistral.py
 
 - The conversation remains open, ready for additional inputs in future runs.
 
+<img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/persistent-chat.png" width="800" style="display: block; margin-left: auto; margin-right: auto;">
+
 - At least one Webex message with summary information is sent to configured spaces.
+
+<img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/network-analyzer.png" height="400" style="display: block; margin-left: auto; margin-right: auto;">
 
 - If the network state is deemed critical, a second urgent Webex message is sent to alert the team promptly.
 
+<img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/network-buddy.png" height="400" style="display: block; margin-left: auto; margin-right: auto;">
 
-<img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/persistent-chat.png" width="800" style="display: block; margin-left: auto; margin-right: auto;">
 
 ### **Review the Output**
 
