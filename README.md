@@ -166,6 +166,7 @@ python mistral.py
     *   **If there are multiple devices of a particular `device_type`:**
         *   Send the output from each device to Mistral AI for individual analysis.
         *   Send the combined output from all devices of that type to Mistral AI for a combined analysis, including identification of common configurations, deviations, and potential vulnerabilities.
+<img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/device-analysis.png" width="600" style="display: block; margin-left: auto; margin-right: auto;">
 5.  Save the raw outputs and the AI-generated summaries to a timestamped YAML file in the `output/<device_type>` directory.
 6.  Display analysis for each device and for the device group in the terminal.
 7. Invoke `analyze_and_collab.py` to create or continue a persistent AI Agent conversation:
