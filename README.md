@@ -216,7 +216,7 @@ The YAML files will contain:
 
 - `analyze_and_collab.py` manages a persistent AI Agent conversation by saving conversation IDs locally (`agent_id.txt` and `conversation_id.txt`), allowing the Agent to maintain context across multiple script executions.
 
-- This dual-layer approach uses the Mistral AI API for immediate analysis and the Agent for persistent, conversational context—providing redundancy and richer collaboration in case one service is down.
+- This dual-layer approach uses the Mistral AI API for immediate analysis and the Agent for persistent, conversational context—providing redundancy and richer collaboration in case one service is down. For example, if the AI API is not reachable, the device outputs will still be saved locally by `mistral.py' (just without the analysis and summary apppended), allowing `analyze_and_collab.py' to still create a persistent conversation regarding the network state. On the other hand, if the AI API is functioning but the agent creation pipeline is down for some reason, we still at least get the initial analysis and summary from the API. 
 
 - The Agent conversation stays open after each run, enabling continued interaction and incremental updates.
 
