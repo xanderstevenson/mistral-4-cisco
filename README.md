@@ -224,5 +224,6 @@ The YAML files will contain:
   - An additional urgent alert message is sent to a designated individual if the network state is critical, ensuring timely awareness and response.
  
   - The Webex messages can contain a link to a dedicated Mistral AI In-Browser Assistant (Le Chat) if an Agent with a relevant system prompt (instruction) is created using Mistral's La Platforme dashboard. When an agent is created via the dashboard, the URL for the Le Chat chat assistant can be saved in the .env file. From there, the `analyze_and_collab.py` script will place the URL into the Webex messages.
-<img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/Le-Chat.png" width="600" style="display: block; margin-left: auto; margin-right: auto;">
+<img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/Le-Chat.png" width="400" style="display: block; margin-left: auto; margin-right: auto;">
+
 - For ad hoc, non-persistent troubleshooting, users can run `troubleshoot.py` directly to engage with the AI Agent without persisting context.
