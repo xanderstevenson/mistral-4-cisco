@@ -34,18 +34,22 @@ This project automates the **collection**, **analysis**, and **collaborative tro
 - **Compliance & Documentation**: Generate structured YAML summaries.
 - **Security Auditing**: Spot misconfigurations, default credentials, and exposed ports.
 
+---
 
-## **Prerequisites**
+## **🧰 Prerequisites**
 
 Before you begin, ensure you have the following:
 
-*   *Cisco Network Devices*: Access to Cisco network devices (e.g., Nexus switches, IOS-XE routers) with SSH enabled.
-*   *Mistral AI Account and API Key*: A Mistral AI account and a valid API key. You can sign up at [Mistral AI](https://mistral.ai/).
-*   *Python Environment*: A Python 3.9+ environment with the necessary libraries installed.
-*   *SSH Credentials*: Valid SSH credentials (username and password) for accessing the Cisco devices.
-*   *Source of Truth YAML File*: A YAML file (e.g., `source_of_truth/devices.yaml`) containing a list of devices with their connection details and device types.
+- ✅ Cisco Devices (e.g. Nexus, IOS-XE) with SSH access.
+- ✅ Mistral AI API Key (from [Mistral AI](https://mistral.ai/)).
+- ✅ Python 3.9+ environment.
+- ✅ Webex Bot Token (optional, for messaging features).
+- ✅ `.env` file with required keys and IDs.
+- ✅ `source_of_truth/devices.yaml` file with devices grouped by type.
 
-## **Set Up**
+---
+
+## **⚙️ Set Up Instructions**
 
 ### Step 1: Obtain a Mistral AI API Key
 
