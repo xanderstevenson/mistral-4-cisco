@@ -230,3 +230,19 @@ The YAML files will contain:
 <img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/Le-Chat.png" width="500" style="display: block; margin-left: auto; margin-right: auto;">
 
 - For ad hoc, non-persistent troubleshooting, users can run `troubleshoot.py` directly to engage with the AI Agent without persisting context.
+
+---
+
+## **Helpful Links**
+
+- **Mistral Docs, including Quickstart and Models:** https://docs.mistral.ai/
+
+- **Mistral AI API, including OpenAPI specification:** https://docs.mistral.ai/api/
+
+- **Le Chat:** https://chat.mistral.ai/chat
+
+- **La Platforme:** https://console.mistral.ai/
+
+- **Blog: Build AI agents with the Mistral Agents API:** https://mistral.ai/news/agents-api
+
+
