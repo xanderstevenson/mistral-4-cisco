@@ -219,7 +219,7 @@ The YAML files will contain:
 
 - Webex notifications are automatically sent by `analyze_and_collab.py`:
 
-  - A summary message is always sent to a team Wbeex space.
+  - A summary message is always sent to a team Webex space.
 
   - An additional urgent alert message is sent to a designated individual if the network state is critical, ensuring timely awareness and response.
 
