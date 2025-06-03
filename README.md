@@ -171,7 +171,7 @@ python mistral.py
 
 <img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/Mistral-Output.png" width="800" style="display: block; margin-left: auto; margin-right: auto;">
 
-7. Invoke analyze_and_collab.py to create or continue a persistent AI Agent conversation:
+7. Invoke `analyze_and_collab.py` to create or continue a persistent AI Agent conversation:
 
 - This script manages a long-lived conversation by storing agent_id and conversation_id in agent_id.txt and conversation_id.txt.
 
