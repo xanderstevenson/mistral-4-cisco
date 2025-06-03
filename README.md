@@ -213,8 +213,8 @@ The YAML files will contain:
 
 - Webex notifications are automatically sent by `analyze_and_collab.py`:
 
--- A summary message is always sent.
+  - A summary message is always sent.
 
--- An additional urgent alert message is sent if the network state is critical, ensuring timely awareness and response.
+  - An additional urgent alert message is sent if the network state is critical, ensuring timely awareness and response.
 
 - For ad hoc, non-persistent troubleshooting, users can run `troubleshoot.py` directly to engage with the AI Agent without persisting context.
