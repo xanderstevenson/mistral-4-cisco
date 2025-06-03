@@ -168,9 +168,6 @@ python mistral.py
         *   Send the combined output from all devices of that type to Mistral AI for a combined analysis, including identification of common configurations, deviations, and potential vulnerabilities.
 5.  Save the raw outputs and the AI-generated summaries to a timestamped YAML file in the `output/<device_type>` directory.
 6.  Display analysis for each device and for the device group in the terminal.
-
-<img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/Mistral-Output.png" width="800" style="display: block; margin-left: auto; margin-right: auto;">
-
 7. Invoke `analyze_and_collab.py` to create or continue a persistent AI Agent conversation:
 
 - This script manages a long-lived conversation by storing agent_id and conversation_id in agent_id.txt and conversation_id.txt.
@@ -184,10 +181,12 @@ python mistral.py
 - If the network state is deemed critical, a second urgent Webex message is sent to alert the team promptly.
 
 
+<img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/persistent-chat.png" width="800" style="display: block; margin-left: auto; margin-right: auto;">
+
 ### **Review the Output**
 
 
-The script will create a directory named `output` (if it doesn't already exist) and subdirectories for each device type (e.g., `output/nxos`, `output/iosxe`). Each subdirectory will contain timestamped YAML files with the raw device outputs and the AI-generated summaries.
+The script will immediately disply the analysis it recieves back from the Mistral AI API in the terminal. This will include a summary that explains the status and health of each device, along with the combined analysis of all devices. Detailed points include: Potential Issues/Anomalies, Common Configurations and Settings, Significant Deviations/Inconsistencies, Potential Security Vulnerabilities or Misconfigurations, and Suggestions for Improvement. The script will create a directory named `output` (if it doesn't already exist) and subdirectories for each device type (e.g., `output/nxos`, `output/iosxe`). Each subdirectory will contain timestamped YAML files with the raw device outputs and the AI-generated summaries.
 
 The YAML files will contain:
 
@@ -198,6 +197,8 @@ The YAML files will contain:
     *   The raw outputs from each device.
     *   AI-generated summaries for each individual device.
     *   A combined AI-generated summary that identifies common configurations, deviations, and potential vulnerabilities across all devices of that type.
+
+<img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/Mistral-Output.png" width="800" style="display: block; margin-left: auto; margin-right: auto;">
 
 ---
 
