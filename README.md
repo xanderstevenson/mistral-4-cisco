@@ -5,18 +5,35 @@
 </div>
 
 
-## **Objective**
+## **🔍 Objective**
 
-This project automates the collection and analysis of data from Cisco network devices using SSH and the Mistral AI API. The goal is to provide network engineers with intelligent summaries and insights into device configurations, operational status, and potential issues. The script connects to devices, collects output from various `show` commands, and then sends the collected data to Mistral AI for analysis. The results are then displayed in the terminal and saved in organized, timestamped YAML files. This version supports multiple device types (e.g., nxos, iosxe) and groups analysis by device type.
+This project automates the **collection**, **analysis**, and **collaborative troubleshooting** of data from Cisco network devices using SSH and **Mistral AI**, combining real-time intelligence with persistent memory.
 
+### Key Goals:
+- Summarize device health and configurations.
+- Detect network issues and anomalies.
+- Enable persistent, AI-assisted team collaboration.
 
-## **Use Cases**
+---
 
-*   *Proactive Network Monitoring*: Regularly collect and analyze device data to identify potential problems before they impact the network.
-*   *Configuration Auditing*: Ensure that devices are configured according to organizational standards and security best practices.
-*   *Troubleshooting*: Quickly gather and analyze relevant data from multiple devices to diagnose network issues.
-*   *Security Analysis*: Identify potential security vulnerabilities or misconfigurations.
-*   *Inventory and Documentation*: Automatically generate summaries of device configurations for documentation purposes.
+## **📦 Project Overview**
+
+| Script | Purpose |
+|--------|---------|
+| `mistral.py` | Collects device output and sends it to Mistral AI for analysis. Saves YAML summaries. |
+| `troubleshoot.py` | Launches a **stateless AI chat** for ad hoc troubleshooting of Cisco devices. |
+| `analyze_and_collab.py` | Creates a **persistent Mistral AI Agent** with stored context and collaborative memory. Sends analysis reports to Webex, notifies team members, and enables an interactive session. |
+
+---
+
+## **🚀 Use Cases**
+
+- **Proactive Network Monitoring**: Run daily/weekly to detect risks and degradations.
+- **Configuration Auditing**: Validate against known-good standards.
+- **Incident Response & Troubleshooting**: Use agent memory to track ongoing issues.
+- **Compliance & Documentation**: Generate structured YAML summaries.
+- **Security Auditing**: Spot misconfigurations, default credentials, and exposed ports.
+
 
 ## **Prerequisites**
 
