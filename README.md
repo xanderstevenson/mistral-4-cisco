@@ -7,7 +7,7 @@
 
 ## **🔍 Objective**
 
-This project automates the **collection**, **analysis**, and **collaborative troubleshooting** of data from Cisco network devices using SSH and **Mistral AI**, combining real-time intelligence with persistent memory. It utlizes both the Mistral AI API and Mistral AI Agents. Everything you need to run this is free: a free Mistral Account, free API plan, and free models.
+This project automates the **collection**, **analysis**, and **collaborative troubleshooting** of data from Cisco network devices using SSH/Paramiko and **Mistral AI**, combining real-time intelligence with persistent memory. It utlizes both the Mistral AI API and Mistral AI Agents. Everything you need to run this is free: a free Mistral Account, free API plan, and free models.
 
 ### Key Goals:
 - Summarize device health and configurations.
