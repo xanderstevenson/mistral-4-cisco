@@ -91,7 +91,7 @@ pip install -r requirements.txt
 
 
 
-### **Step 4: Place the Mistral API key in the environment**
+### **Step 4: Add Environment Variables**
 
 A. Create a `.env` file in the root directory of your project to store your Mistral AI API key in a persistent manner:
 
@@ -103,6 +103,11 @@ touch .env
 
 ```bash
 MISTRAL_API_KEY=your_mistral_api_key_here
+WEBEX_BOT_TOKEN=your_webex_token
+WEBEX_SPACE=webex_space_id
+ALEXANDER_WEBEX_ID=person_id_for_direct_alerts
+LE_CHAT_URL=https://your-collaboration-space-url
+
 ````
 
 * This method may require some additional steps in IDEs like VS Code, such as adding an entry in .vscode/settings.json as well as the settings.json in the VS Code Settings.
@@ -111,15 +116,22 @@ MISTRAL_API_KEY=your_mistral_api_key_here
 B. To save the API key non-persistently, you can:
 
 ```bash
-MISTRAL_API_KEY=your_mistral_api_key_here
+export MISTRAL_API_KEY=your_mistral_api_key_here
+export WEBEX_BOT_TOKEN=your_webex_token
+export WEBEX_SPACE=webex_space_id
+export ALEXANDER_WEBEX_ID=person_id_for_direct_alerts
+export LE_CHAT_URL=https://your-collaboration-space-url
 ```
 
 
-### **Step 5: Create the `source_of_truth/devices.yaml` File**
+### **Step 5: Define Your Devices**
 
-``bash
+Create your device list in source_of_truth/devices.yaml:
+
+```bash
 mkdir source_of_truth
 touch source_of_truth/devices.yaml
+```
 
 ```bash
 devices:
@@ -133,6 +145,8 @@ devices:
 The devices should be accurately labelled by device_type so they script can loop though those device families, aggregate the family info, and send it to Mistral for analysis on individual devices, as well as on the family of devices. 
 
 **Note** *For the the NX-OS device used in this demonstration, I am connecting to the Open NX-OS Programmability AlwaysOn sandbox from Cisco DevNet: https://devnetsandbox.cisco.com/DevNet/catalog/Open-NX-OS-Programmability_open-nx-os*
+
+
 
 ## **Run It**
 
