@@ -1,4 +1,4 @@
-# **Mistral AI-Powered Network Analysis for Cisco Devices Using Mistral's AI API and Agent Architecture**
+# **AI-Powered Network Analysis for Cisco Devices Using Mistral's AI API and Agent Architecture**
 
 <div style="text-align:center">
   <img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/mistral-ai.jpg" width="400">
