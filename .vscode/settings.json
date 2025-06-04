@@ -1,4 +1,5 @@
 {
     "python.envFile": "${workspaceFolder}/.env",
-    "terminal.integrated.shell.osx": "/bin/zsh"
+    "terminal.integrated.shell.osx": "/bin/zsh",
+    "python.analysis.stubPath": "/tmp/pylance-stubs"
 }

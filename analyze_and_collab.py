@@ -59,6 +59,17 @@ def create_network_architect_agent(client):
         print(f"❌ Error creating agent: {e}")
         return None
 
+def is_valid_agent_id(client, agent_id):
+    try:
+        # Ensure the get method is called with only the agent_id
+        agent = client.beta.agents.get(agent_id=agent_id)
+        return True  # Agent exists and is accessible
+    except Exception as e:
+        print(f"⚠️ Agent ID {agent_id} is invalid or inaccessible: {e}")
+        return False  # Agent does not exist or is not accessible
+
+
+
 WEBEX_TOKEN = os.getenv("WEBEX_BOT_TOKEN")
 WEBEX_SPACE = os.getenv("WEBEX_SPACE")
 ALEXANDER_WEBEX_ID = os.getenv("ALEXANDER_WEBEX_ID")
@@ -194,8 +205,12 @@ def main(device_type):
     mistral_client = get_mistral_client()
 
     agent_id = load_agent_id()
-    if not agent_id:
-        print("No saved agent ID found. Creating a new network architect agent...")
+
+    # Check if the loaded agent ID is valid
+    if agent_id and is_valid_agent_id(mistral_client, agent_id):
+        print(f"✅ Loaded valid agent ID: {agent_id}")
+    else:
+        print("No saved agent ID found or existing agent ID is invalid. Creating a new network architect agent...")
         agent_id = create_network_architect_agent(mistral_client)
         if agent_id:
             save_agent_id(agent_id)
@@ -221,11 +236,11 @@ def main(device_type):
         if critical_issue_found else "✅ No major issues detected."
     )
 
-    team_msg = f"""✅ **Network Analysis Completed**  
-**Device Type**: `{device_type_loaded}`  
-**Timestamp**: `{timestamp}`  
-{short_issue}  
-📁 **Report**: `output/{device_type_loaded}/{yaml_filename}`  
+    team_msg = f"""✅ **Network Analysis Completed**
+**Device Type**: `{device_type_loaded}`
+**Timestamp**: `{timestamp}`
+{short_issue}
+📁 **Report**: `output/{device_type_loaded}/{yaml_filename}`
 💬 [Open La Chat]({chat_link})
 """
 
@@ -241,11 +256,11 @@ def main(device_type):
         context_excerpt = (
             "\n".join(matching_lines[:5]) if matching_lines else "Critical indicators found in summary tail."
         )
-        critical_msg = f"""🚨 **Critical Network Issue Detected**  
-A major issue was found during the analysis of `{device_type_loaded}` devices at `{timestamp}`.  
-🔍 **Detected Indicators**:  
-{context_excerpt}  
-🗂 **Report**: `output/{device_type_loaded}/{yaml_filename}`  
+        critical_msg = f"""🚨 **Critical Network Issue Detected**
+A major issue was found during the analysis of `{device_type_loaded}` devices at `{timestamp}`.
+🔍 **Detected Indicators**:
+{context_excerpt}
+🗂 **Report**: `output/{device_type_loaded}/{yaml_filename}`
 💬 [Discuss in La Chat]({chat_link})
 """
         send_webex_message(ALEXANDER_WEBEX_ID, critical_msg)
@@ -253,6 +268,13 @@ A major issue was found during the analysis of `{device_type_loaded}` devices at
 
     # Start interactive chat session
     interactive_chat(mistral_client, agent_id)
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) != 2:
+        print("Usage: python analyze_and_collab.py <device_type>")
+    else:
+        main(sys.argv[1])
 
 if __name__ == "__main__":
     import sys
