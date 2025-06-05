@@ -1,5 +1,7 @@
 # **AI-Powered Network Analysis for Cisco Devices Using Mistral's AI API and Agent Architecture**
 
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/xanderstevenson/mistral-4-cisco)
+
 <div style="text-align:center">
   <img src="https://github.com/xanderstevenson/mistral-4-cisco/blob/main/images/mistral-ai.jpg" width="400">
 </div>
