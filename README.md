@@ -7,6 +7,11 @@
 </div>
 
 
+## **⚠️ Data Privacy Disclaimer ⚠️** 
+
+Although Mistral complies with the EU's more stringent data sovereignty guidelines, any non-personally identifiable information you share with them may be retained. I believe that for their agents, data is stored for 30 days, while for the AI API, the information you send is retained until you delete your account.
+
+
 ## **🔍 Objective**
 
 This project automates the **collection**, **analysis**, and **collaborative troubleshooting** of data from Cisco network devices using SSH/Paramiko and **Mistral AI**, combining real-time intelligence with persistent memory. It utlizes both the Mistral AI API and Mistral AI Agents. Everything you need to run this is free: a free Mistral Account, free API plan, and free models.
